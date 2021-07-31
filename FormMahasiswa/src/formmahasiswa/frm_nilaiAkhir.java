@@ -43,7 +43,6 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txt_matkul = new javax.swing.JTextField();
         txt_kodeMK = new javax.swing.JTextField();
         txt_absen = new javax.swing.JTextField();
         txt_tugas = new javax.swing.JTextField();
@@ -74,6 +73,7 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        cmb_matkul = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -124,12 +124,6 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Presentase UAS");
-
-        txt_matkul.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_matkulActionPerformed(evt);
-            }
-        });
 
         txt_absen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,6 +217,8 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel18.setText("%");
 
+        cmb_matkul.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -238,7 +234,7 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_matkul, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cmb_matkul, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -327,7 +323,7 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txt_matkul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmb_matkul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -400,10 +396,6 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_kehadiranActionPerformed
 
-    private void txt_matkulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_matkulActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_matkulActionPerformed
-
     private void txt_absenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_absenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_absenActionPerformed
@@ -468,6 +460,7 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
     private javax.swing.JButton btn_simpan;
     private javax.swing.JButton btn_tambah;
     private javax.swing.JButton btn_ubah;
+    private javax.swing.JComboBox<String> cmb_matkul;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -493,7 +486,6 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
     private javax.swing.JTextField txt_absen;
     private javax.swing.JTextField txt_kehadiran;
     private javax.swing.JTextField txt_kodeMK;
-    private javax.swing.JTextField txt_matkul;
     private javax.swing.JTextField txt_presentaseuas;
     private javax.swing.JTextField txt_presentaseuts;
     private javax.swing.JTextField txt_tugas;

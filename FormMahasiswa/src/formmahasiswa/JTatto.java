@@ -9,7 +9,7 @@ import java.awt.Component;
 
 /**
  *
- * @author LENOVO
+ * @author Acer
  */
 public class JTatto extends Component {
 

@@ -5,6 +5,13 @@
  */
 package formmahasiswa;
 
+import javax.swing.*;
+//fungsi sql
+import java.sql.*;
+//fungsi unutk pengguna
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Acer
@@ -49,6 +56,11 @@ public class frm_matakuliah extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 255));
 
@@ -248,6 +260,12 @@ public class frm_matakuliah extends javax.swing.JFrame {
     private void txt_dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_dataActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_dataActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        frm_utama utama = new frm_utama();
+        utama.setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

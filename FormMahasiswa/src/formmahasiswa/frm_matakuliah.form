@@ -93,7 +93,7 @@
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="115" max="-2" attributes="0"/>
-                  <EmptySpace pref="14" max="32767" attributes="0"/>
+                  <EmptySpace pref="11" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btn_tambah" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_ubah" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -161,7 +161,11 @@
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="txt_data" min="-2" pref="161" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btn_cari" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btn_tampil" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -172,6 +176,8 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txt_data" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_cari" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_tampil" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -191,6 +197,28 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Masukan Data"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_cari">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="11" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="CARI"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_cariActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_tampil">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="11" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Tampilkan Seluruh Mata Kuliah"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_tampilActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -283,6 +311,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="TAMBAH"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_tambahActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_ubah">
           <Properties>
@@ -291,6 +322,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="UBAH"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ubahActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_hapus">
           <Properties>
@@ -299,6 +333,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="HAPUS"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_hapusActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_simpan">
           <Properties>
@@ -307,6 +344,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="SIMPAN"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_simpanActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_batal">
           <Properties>
@@ -315,6 +355,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="BATAL"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_batalActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_keluar">
           <Properties>
@@ -323,6 +366,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="KELUAR"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_keluarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>

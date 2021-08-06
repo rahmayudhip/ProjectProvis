@@ -28,6 +28,13 @@ public class frm_nilai extends javax.swing.JFrame {
     public frm_nilai()
     {
             initComponents();
+            
+        cmb_nama.removeAllItems(); //digunakan untuk membersihkan item jcombobox sebelum diisi.
+        tampilNama();
+        
+        cmb_matkul.removeAllItems(); //digunakan untuk membersihkan item jcombobox sebelum diisi.
+        tampilMatkul();
+    
         
         dbsetting = new koneksi();
         driver = dbsetting.SettingPanel("DBDriver");
@@ -128,7 +135,7 @@ public class frm_nilai extends javax.swing.JFrame {
         txt_kodeMK.setText("");
         txt_UTS.setText("");
         txt_UAS.setText("");
-        txt_angkatan.setText("");
+       
            
     }
    public void nonaktif_teks()
@@ -169,7 +176,7 @@ public class frm_nilai extends javax.swing.JFrame {
             txt_kodeMK.setText(tableModel.getValueAt(row, 5).toString());
             txt_UTS.setText(tableModel.getValueAt(row, 6).toString());
             txt_UAS.setText(tableModel.getValueAt(row, 7).toString());
-            txt_angkatan.setText(tableModel.getValueAt(row, 8).toString());
+            
             btn_simpan.setEnabled(false);
             btn_ubah.setEnabled(true);
             btn_hapus.setEnabled(true);
@@ -178,6 +185,50 @@ public class frm_nilai extends javax.swing.JFrame {
         
     }
 
+    public void tampilNama() {
+        java.sql.Statement st;
+        java.sql.Connection con;
+        java.sql.ResultSet rs;
+        try {
+            con = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/java_akdmk", "root", "");
+            st = con.createStatement();
+            String s = "select * from t_mahasiswa ";
+            rs = st.executeQuery(s);
+            while (rs.next()) {
+                cmb_nama.addItem(rs.getString(2));
+                //cmb_nama adalah nama variabel Jcombobox
+                //rs.getString(2) adalah kolom nama mahasiswa yang diambil secara urut dimulai dari satu
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR" + e.getMessage());
+            //digunakan untuk menampilkan pesan jika terjadi error 
+        }
+    }
+    public void tampilMatkul() {
+        java.sql.Statement st;
+        java.sql.Connection con;
+        java.sql.ResultSet rs;
+        try {
+            con = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/java_akdmk", "root", "");
+            st = con.createStatement();
+            String s = "select * from t_mata_kuliah ";
+            rs = st.executeQuery(s);
+            while (rs.next()) {
+                cmb_matkul.addItem(rs.getString(2));
+                //cmb_nama adalah nama variabel Jcombobox
+                //rs.getString(2) adalah kolom nama mahasiswa yang diambil secara urut dimulai dari satu
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR" + e.getMessage());
+            //digunakan untuk menampilkan pesan jika terjadi error 
+        }
+    
+    
+     
+    
+    
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -222,9 +273,9 @@ public class frm_nilai extends javax.swing.JFrame {
         txt_kodeMK = new javax.swing.JTextField();
         txt_UTS = new javax.swing.JTextField();
         txt_UAS = new javax.swing.JTextField();
-        txt_angkatan = new javax.swing.JTextField();
         cmb_nama = new javax.swing.JComboBox<>();
         cmb_matkul = new javax.swing.JComboBox<>();
+        txt_angkatan = new com.toedter.calendar.JYearChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -307,6 +358,11 @@ public class frm_nilai extends javax.swing.JFrame {
 
         btn_simpan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_simpan.setText("SIMPAN");
+        btn_simpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_simpanActionPerformed(evt);
+            }
+        });
 
         btn_batal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_batal.setText("BATAL");
@@ -432,12 +488,13 @@ public class frm_nilai extends javax.swing.JFrame {
                                     .addComponent(jLabel15))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_kodeMK, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_angkatan, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(txt_UAS, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                                         .addComponent(txt_UTS, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addComponent(cmb_matkul, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(cmb_matkul, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txt_angkatan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txt_kodeMK, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)))))
                         .addGap(0, 25, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
@@ -501,10 +558,10 @@ public class frm_nilai extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
-                    .addComponent(txt_angkatan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
-                        .addComponent(txt_tugas2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_tugas2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_angkatan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_tugas3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -538,6 +595,7 @@ public class frm_nilai extends javax.swing.JFrame {
 
     private void btn_keluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_keluarActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_btn_keluarActionPerformed
 
     private void txt_tugas2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_tugas2ActionPerformed
@@ -546,9 +604,13 @@ public class frm_nilai extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-       frm_utama utama = new frm_utama();
-       utama.setVisible(true);
+        frm_mhs mhs = new frm_mhs();
+         mhs.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
+
+    private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_simpanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -616,7 +678,7 @@ public class frm_nilai extends javax.swing.JFrame {
     private javax.swing.JTable tabel_nilai;
     private javax.swing.JTextField txt_UAS;
     private javax.swing.JTextField txt_UTS;
-    private javax.swing.JTextField txt_angkatan;
+    private com.toedter.calendar.JYearChooser txt_angkatan;
     private javax.swing.JTextField txt_kehadiran;
     private javax.swing.JTextField txt_kodeMK;
     private javax.swing.JTextField txt_masukData;
@@ -625,4 +687,6 @@ public class frm_nilai extends javax.swing.JFrame {
     private javax.swing.JTextField txt_tugas2;
     private javax.swing.JTextField txt_tugas3;
     // End of variables declaration//GEN-END:variables
+
+    
 }

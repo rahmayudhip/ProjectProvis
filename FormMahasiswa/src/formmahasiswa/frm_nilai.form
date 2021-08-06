@@ -85,13 +85,15 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txt_kodeMK" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
-                                      <Component id="txt_angkatan" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
                                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                           <Component id="txt_UAS" alignment="0" pref="50" max="32767" attributes="0"/>
                                           <Component id="txt_UTS" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <Component id="cmb_matkul" min="-2" pref="166" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="txt_angkatan" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txt_kodeMK" alignment="0" pref="145" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -171,11 +173,11 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_angkatan" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txt_tugas2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="txt_angkatan" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -334,6 +336,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="SIMPAN"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_simpanActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_batal">
           <Properties>
@@ -555,8 +560,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txt_UAS">
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_angkatan">
-        </Component>
         <Component class="javax.swing.JComboBox" name="cmb_nama">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -586,6 +589,8 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="com.toedter.calendar.JYearChooser" name="txt_angkatan">
         </Component>
       </SubComponents>
     </Container>

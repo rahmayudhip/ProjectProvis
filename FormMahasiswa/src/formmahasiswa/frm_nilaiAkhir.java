@@ -23,6 +23,29 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
      */
     public frm_nilaiAkhir() {
         initComponents();
+        cmb_matkul.removeAllItems();
+        tampilMatkul();
+    }
+    
+    
+    public void tampilMatkul() {
+        java.sql.Statement st;
+        java.sql.Connection con;
+        java.sql.ResultSet rs;
+        try {
+            con = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/java_akdmk", "root", "");
+            st = con.createStatement();
+            String s = "select * from t_mata_kuliah";
+            rs = st.executeQuery(s);
+            while (rs.next()) {
+                cmb_matkul.addItem(rs.getString(2));
+                //cmb_nama adalah nama variabel Jcombobox
+                //rs.getString(2) adalah kolom nama mahasiswa yang diambil secara urut dimulai dari satu
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR" + e.getMessage());
+            //digunakan untuk menampilkan pesan jika terjadi error 
+        }
     }
 
     /**
@@ -201,6 +224,11 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
 
         btn_keluar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_keluar.setText("KELUAR");
+        btn_keluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_keluarActionPerformed(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel14.setText("Pertemuan");
@@ -414,9 +442,14 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-       frm_utama utama = new frm_utama();
-        utama.setVisible(true);
+       frm_mhs mhs = new frm_mhs();
+         mhs.setVisible(false);
     }//GEN-LAST:event_formWindowClosed
+
+    private void btn_keluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_keluarActionPerformed
+        // TODO add your handling code here:
+         System.exit(0);
+    }//GEN-LAST:event_btn_keluarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -495,4 +528,6 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
     private javax.swing.JTextField txt_uas;
     private javax.swing.JTextField txt_uts;
     // End of variables declaration//GEN-END:variables
+
+    
 }

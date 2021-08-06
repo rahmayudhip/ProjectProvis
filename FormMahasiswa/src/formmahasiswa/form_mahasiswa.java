@@ -9,7 +9,7 @@ package formmahasiswa;
  *
  * @author LENOVO
  */
-public class FormMahasiswa {
+public class form_mahasiswa {
 
     /**
      * @param args the command line arguments

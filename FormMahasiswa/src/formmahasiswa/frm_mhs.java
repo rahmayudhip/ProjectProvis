@@ -113,7 +113,7 @@ public class frm_mhs extends javax.swing.JFrame {
         txt_nim.setText("");
         txt_nama.setText("");
         txt_tempat_lahir.setText("");
-        txt_tanggal_lahir.setText("");
+        tanggal_lahir();
         txt_alamat.setText("");
     }
     
@@ -122,7 +122,7 @@ public class frm_mhs extends javax.swing.JFrame {
         txt_nim.setEnabled(false);
         txt_nama.setEnabled(false);
         txt_tempat_lahir.setEnabled(false);
-        txt_tanggal_lahir.setEnabled(false);
+        tanggal_lahir();
         txt_alamat.setEnabled(false);
     }
     public void aktif_teks()
@@ -130,7 +130,7 @@ public class frm_mhs extends javax.swing.JFrame {
        txt_nim.setEnabled(true);
         txt_nama.setEnabled(true);
         txt_tempat_lahir.setEnabled(true);
-        txt_tanggal_lahir.setEnabled(true);
+        jDateChooser1.setEnabled(true);
         txt_alamat.setEnabled(true); 
     }
 
@@ -140,7 +140,7 @@ public class frm_mhs extends javax.swing.JFrame {
         txt_nim.setText(tableModel.getValueAt(row, 0).toString());
         txt_nama.setText(tableModel.getValueAt(row, 1).toString());
         txt_tempat_lahir.setText(tableModel.getValueAt(row, 2).toString());
-        txt_tanggal_lahir.setText(tableModel.getValueAt(row, 3).toString());
+        tanggal_lahir();
         txt_alamat.setText(tableModel.getValueAt(row, 4).toString());
         btn_simpan.setEnabled(false);
         btn_ubah.setEnabled(true);
@@ -149,6 +149,8 @@ public class frm_mhs extends javax.swing.JFrame {
         aktif_teks();
         
     }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -168,8 +170,6 @@ public class frm_mhs extends javax.swing.JFrame {
         txt_tempat_lahir = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txt_tanggal_lahir = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_alamat = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -180,12 +180,12 @@ public class frm_mhs extends javax.swing.JFrame {
         btn_simpan = new javax.swing.JButton();
         btn_batal = new javax.swing.JButton();
         btn_keluar = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         txt_cari_nim = new javax.swing.JTextField();
         btn_cari = new javax.swing.JButton();
         btn_tampil = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(237, 235, 235));
@@ -246,9 +246,6 @@ public class frm_mhs extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Alamat");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setText("(yyy mmm ddd)");
-
         txt_alamat.setColumns(20);
         txt_alamat.setRows(5);
         jScrollPane1.setViewportView(txt_alamat);
@@ -302,8 +299,11 @@ public class frm_mhs extends javax.swing.JFrame {
         btn_batal.setText("Batal");
 
         btn_keluar.setText("Keluar");
-
-        jLabel8.setText("Dibuat Oleh : Rahmayudhi Prakoso");
+        btn_keluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_keluarActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Pencarian Data Mahasiswa", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -336,7 +336,7 @@ public class frm_mhs extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(btn_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(91, 91, 91)
-                .addComponent(btn_tampil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_tampil, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -351,6 +351,12 @@ public class frm_mhs extends javax.swing.JFrame {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
+        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser1PropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -358,53 +364,44 @@ public class frm_mhs extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(47, 47, 47)
+                        .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_ubah, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_keluar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_ubah, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn_keluar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addGap(35, 35, 35)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel4))
-                                        .addGap(35, 35, 35)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txt_nim, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txt_tempat_lahir, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel6))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(txt_tanggal_lahir, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel7))
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(47, 47, 47))
-                                    .addComponent(jScrollPane2)
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel8)))
-                .addContainerGap())
+                                    .addComponent(txt_nim, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_tempat_lahir, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(47, 47, 47))
+                            .addComponent(jScrollPane2)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -428,10 +425,9 @@ public class frm_mhs extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(txt_tempat_lahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
-                            .addComponent(txt_tanggal_lahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -446,9 +442,7 @@ public class frm_mhs extends javax.swing.JFrame {
                     .addComponent(btn_simpan)
                     .addComponent(btn_batal)
                     .addComponent(btn_keluar))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
 
         pack();
@@ -478,7 +472,7 @@ public class frm_mhs extends javax.swing.JFrame {
         // TODO add your handling code here:
         String data[]=new String[5];
         
-        if ((txt_nim.getText().isEmpty()) || (txt_tanggal_lahir.getText().isEmpty())) {
+        if ((txt_nim.getText().isEmpty()) || (jDateChooser1.getDateFormatString().isEmpty())) {
             JOptionPane.showMessageDialog(null, "Data tidak boleh kosong, silahkan dilengkapi");
             
             txt_nim.requestFocus();
@@ -498,13 +492,13 @@ public class frm_mhs extends javax.swing.JFrame {
                                                         + "('" +txt_nim.getText()+"',"
                                                         + "'" +txt_nama.getText()+"',"
                                                         + "'" +txt_tempat_lahir.getText()+"',"
-                                                        + "'" +txt_tanggal_lahir.getText()+"',"
+                                                        + "'" +jDateChooser1.getDateFormatString()+"',"
                                                         + "'" +txt_alamat.getText()+"')";
                 stt.executeUpdate(SQL);
                 data[0] = txt_nim.getText();
                 data[1] = txt_nama.getText();
                 data[2] = txt_tempat_lahir.getText();
-                data[3] = txt_tanggal_lahir.getText();
+                data[3] = jDateChooser1.getDateFormatString();
                 data[4] = txt_alamat.getText();
                 tableModel.insertRow(0, data);
                 stt.close();
@@ -522,52 +516,56 @@ public class frm_mhs extends javax.swing.JFrame {
 
     private void tabel_mahasiswaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_mahasiswaMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount()==1){
+        if(evt.getClickCount()==1)
+        {
             tampil_field();
         }
     }//GEN-LAST:event_tabel_mahasiswaMouseClicked
 
     private void btn_ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ubahActionPerformed
         // TODO add your handling code here:
-        String nim = txt_nim.getText();
-        String nama = txt_nama.getText();
-        String tempat_lahir = txt_tempat_lahir.getText();
-        String tgl_lahir = txt_tanggal_lahir.getText();
-        String alamat = txt_alamat.getText();
+        String nim=txt_nim.getText();
+        String nama=txt_nama.getText();
+        String tempat_lahir=txt_tempat_lahir.getText();
+        String tanggal_lahir=jDateChooser1.getDateFormatString();
+        String alamat=txt_alamat.getText();
         
-        if ((nim.isEmpty()) | (alamat.isEmpty())){
-        
+        if ((nim.isEmpty())  | (alamat.isEmpty()))
+        {
             JOptionPane.showMessageDialog(null,"data tidak boleh kosong, silahkan dilengkapi");
             txt_nim.requestFocus();
-        } else {
-            try {
+        }
+        else
+        {
+            try
+            {
                 Class.forName(driver);
-                Connection kon = DriverManager.getConnection(database,user,pass);
-                Statement stt  = kon.createStatement();
-                 String SQL = "UPDATE t_mahasiswa "
-                    + "SET nim='"+nim+"',"
-                    + "nama='"+nama+"',"
-                    + "ttl='"+tempat_lahir+"',"
-                    + "tgl_lahir='"+tgl_lahir+"',"
-                    + "alamat='"+alamat+"' "
+                 Connection kon = DriverManager.getConnection (database,user,pass);
+                 Statement stt = kon.createStatement();
+            String SQL = "UPDATE `t_mahasiswa` "
+                    + "SET `nim`='"+nim+"',"
+                    + "`nama`='"+nama+"',"
+                    + "`ttl`='"+tempat_lahir+"',"
+                    + "`tgl_lahir`='"+tanggal_lahir+"',"
+                    + "`alamat`='"+alamat+"' "
                 + "WHERE "
-                +"nim='"+tableModel.getValueAt(row, 0).toString()+"';";            
-                stt.executeUpdate(SQL);
-                data[0] = nim;
-                data[1] = nama;
-                data[2] = tempat_lahir;
-                data[3] = tgl_lahir;
-                data[4] = alamat;
-                tableModel.removeRow(row);
-                tableModel.insertRow(row, data);
-                stt.close();
-                kon.close();
-                membersihkan_teks();
-                btn_simpan.setEnabled(false);
-                nonaktif_teks();
-              
+                +"`nim`='"+tableModel.getValueAt(row, 0).toString()+"';";            
+            stt.executeUpdate(SQL);
+            data[0] = nim;
+            data[1] = nama;
+            data[2] = tempat_lahir;
+            data[3] = tanggal_lahir;
+            data[4] = alamat;
+            tableModel.removeRow(row);
+            tableModel.insertRow(row,data);
+            stt.close();
+            kon.close();
+            membersihkan_teks();
+            btn_simpan.setEnabled(false);
+            nonaktif_teks();
             }
-            catch (Exception ex){
+            catch (Exception ex)
+            {
                 System.err.println(ex.getMessage());
             }
         }
@@ -576,20 +574,23 @@ public class frm_mhs extends javax.swing.JFrame {
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
         // TODO add your handling code here:
-        try{
+        try
+        {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database,user,pass);
-            Statement stt  = kon.createStatement();
-                 String SQL = "Delete from t_mahasiswa" + "where" + "nim='" +
-                         tableModel.getValueAt(row, 0).toString()+"'";
-                 stt.executeUpdate(SQL);
-                 tableModel.removeRow(row);
-                 stt.close();
-                 kon.close();
-                 membersihkan_teks();
-            }
-        catch (Exception ex){
-            System.err.print(ex.getMessage());
+            Statement  stt = kon.createStatement();
+            String     SQL = "Delete From t_mahasiswa "
+                                + "where "
+                              + "nim='"+tableModel.getValueAt(row, 0).toString()+"'";
+            stt.executeUpdate(SQL);
+            tableModel.removeRow(row);
+            stt.close();
+            kon.close();
+            membersihkan_teks();
+        }
+        catch (Exception ex)
+        {
+            System.err.println(ex.getMessage());
         }
         
     }//GEN-LAST:event_btn_hapusActionPerformed
@@ -649,6 +650,39 @@ public class frm_mhs extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formWindowClosed
 
+    private void btn_keluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_keluarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_keluarActionPerformed
+
+    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+        // TODO add your handling code here:
+        tanggal();
+    }
+    
+    String tgl_lahir;
+    public void tanggal(){
+        if (jDateChooser1.getDate() !=null) {
+            String pattern = "yyyy-MM-dd";
+            SimpleDateFormat format = new SimpleDateFormat(pattern);
+            tgl_lahir = String.valueOf(format.format(jDateChooser1.getDate()));
+            
+        }
+    }
+    
+    public void tanggal_lahir() {
+        try {
+            Connection c = koneksi.getKoneksi();
+            Statement stat = c.createStatement();
+            String sql ="select * from tgl_lahir where nim='"+txt_nim.getText()+"'";
+            ResultSet res = stat.executeQuery(sql);
+            while (res.next()){
+                jDateChooser1.setDate(res.getDate("tanggal_lahir"));
+            }
+        }catch(SQLException ex){
+            
+        }    
+    }//GEN-LAST:event_jDateChooser1PropertyChange
+
     /**
      * @param args the command line arguments
      */
@@ -694,14 +728,13 @@ public class frm_mhs extends javax.swing.JFrame {
     private javax.swing.JButton btn_tambah;
     private javax.swing.JButton btn_tampil;
     private javax.swing.JButton btn_ubah;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -712,7 +745,6 @@ public class frm_mhs extends javax.swing.JFrame {
     private javax.swing.JTextField txt_cari_nim;
     private javax.swing.JTextField txt_nama;
     private javax.swing.JTextField txt_nim;
-    private javax.swing.JTextField txt_tanggal_lahir;
     private javax.swing.JTextField txt_tempat_lahir;
     // End of variables declaration//GEN-END:variables
 }

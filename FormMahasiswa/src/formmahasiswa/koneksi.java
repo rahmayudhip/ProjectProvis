@@ -6,6 +6,7 @@
 package formmahasiswa;
 
 import java.io.FileInputStream;
+import java.sql.Connection;
 import java.util.Properties;
 import javax.swing.JOptionPane;
 
@@ -14,6 +15,10 @@ import javax.swing.JOptionPane;
  * @author LENOVO
  */
 public class koneksi {
+
+    static Connection getKoneksi() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     public Properties mypanel, myLanguage;
     private String strNamePanel;
     public koneksi()

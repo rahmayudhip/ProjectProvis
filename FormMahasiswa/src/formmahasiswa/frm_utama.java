@@ -12,7 +12,7 @@ package formmahasiswa;
 public class frm_utama extends javax.swing.JFrame {
 
     /**
-     * Creates new form frm_utama
+     * 
      */
     public frm_utama() {
         initComponents();
@@ -121,7 +121,7 @@ public class frm_utama extends javax.swing.JFrame {
         jLabel3.setText("10119074 - HANDRIAN RIVALDI");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("10119074 - RAHMAYUDHI PRAKOSO");
+        jLabel4.setText("10119051 - RAHMAYUDHI PRAKOSO");
 
         jMenu1.setText("Aplikasi Kemahasiswaan");
 
@@ -205,6 +205,11 @@ public class frm_utama extends javax.swing.JFrame {
 
     private void btn_simulasiKasusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simulasiKasusActionPerformed
         // TODO add your handling code here:
+        frm_login login = new frm_login();
+        login.setVisible(true);
+        
+        //Menghilangkan form utama
+        this.setVisible(false);
         
     }//GEN-LAST:event_btn_simulasiKasusActionPerformed
 

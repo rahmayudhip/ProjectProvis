@@ -19,5 +19,6 @@ public class form_mahasiswa {
        frm_utama utama = new frm_utama();
        utama.setVisible(true);
     }
+   
     
 }

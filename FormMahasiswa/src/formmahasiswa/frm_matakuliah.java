@@ -5,6 +5,7 @@
  */
 package formmahasiswa;
 
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 //fungsi sql
 import java.sql.*;
@@ -68,7 +69,7 @@ public class frm_matakuliah extends javax.swing.JFrame {
  
     
     
-    String data[]=new String[5];
+    String data[]=new String[2];
     private void settableload()
     {
         String stat = "";
@@ -152,8 +153,6 @@ public class frm_matakuliah extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         txt_data = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        btn_cari = new javax.swing.JButton();
-        btn_tampil = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         txt_noMK = new javax.swing.JTextField();
         txt_namaMK = new javax.swing.JTextField();
@@ -207,25 +206,14 @@ public class frm_matakuliah extends javax.swing.JFrame {
                 txt_dataActionPerformed(evt);
             }
         });
+        txt_data.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_dataKeyPressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Masukan Data");
-
-        btn_cari.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btn_cari.setText("CARI");
-        btn_cari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_cariActionPerformed(evt);
-            }
-        });
-
-        btn_tampil.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btn_tampil.setText("Tampilkan Seluruh Mata Kuliah");
-        btn_tampil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_tampilActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -236,21 +224,15 @@ public class frm_matakuliah extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_cari)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_tampil)
-                .addGap(47, 47, 47))
+                .addContainerGap(378, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(btn_cari)
-                    .addComponent(btn_tampil))
+                    .addComponent(jLabel2))
                 .addContainerGap())
         );
 
@@ -300,6 +282,11 @@ public class frm_matakuliah extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_mataKuliah.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_mataKuliahMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_mataKuliah);
 
         btn_tambah.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -398,7 +385,7 @@ public class frm_matakuliah extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_tambah)
                     .addComponent(btn_ubah)
@@ -435,164 +422,179 @@ public class frm_matakuliah extends javax.swing.JFrame {
 
     private void btn_ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ubahActionPerformed
         // TODO add your handling code here:
-        String nomor=txt_noMK.getText();
-        String nama=txt_namaMK.getText();
+        String no_mk = txt_noMK.getText();
+        String nama_mk = txt_namaMK.getText();
         
-        if ((nomor.isEmpty())  | (nama.isEmpty()))
-        {
-            JOptionPane.showMessageDialog(null,"data tidak boleh kosong, silahkan dilengkapi");
+        
+        if ((no_mk.isEmpty()) || (nama_mk.isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Data tidak boleh kosong, Harap isi !");
             txt_noMK.requestFocus();
         }
-        else
-        {
-            try
-            {
+        else {
+            try {
                 Class.forName(driver);
-                 Connection kon = DriverManager.getConnection (database,user,pass);
-                 Statement stt = kon.createStatement();
-            String SQL = "UPDATE `t_mata_kuliah` "
-                    + "SET `kd_mk`='"+nomor+"',"
-                    + "`nama_mk`='"+nama+"',"
-                + "WHERE "
-                +"`kd_mk`='"+tableModel.getValueAt(row, 0).toString()+"';";            
-            stt.executeUpdate(SQL);
-            data[0] = nomor;
-            data[1] = nama;
-            tableModel.removeRow(row);
-            tableModel.insertRow(row,data);
-            stt.close();
-            kon.close();
-            membersihkan_teks();
-            btn_simpan.setEnabled(false);
-            nonaktif_teks();
+                Connection kon = DriverManager.getConnection(database, user, pass);
+                Statement stt = kon.createStatement();
+                String SQL = "UPDATE t_mata_kuliah "
+                        + "SET "
+                        + "kd_mk = '"+no_mk+"',"
+                        + "nama_mk = '"+nama_mk+"'"
+                        + "WHERE kd_mk= '" + tableModel.getValueAt(row, 0).toString() + "'";
+                
+                stt.executeUpdate(SQL);
+                
+                data[0] = no_mk;
+                data[1] = nama_mk;
+                tableModel.removeRow(row);
+                tableModel.insertRow(row, data);
+                stt.close();
+                kon.close();
+                membersihkan_teks();
+                btn_simpan.setEnabled(false);
+                
+                JOptionPane.showMessageDialog(null, "Data mata kuliah berhasil diubah");
             }
-            catch (Exception ex)
-            {
-                System.err.println(ex.getMessage());
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }//GEN-LAST:event_btn_ubahActionPerformed
 
     private void btn_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahActionPerformed
         // TODO add your handling code here:
-        membersihkan_teks();
         txt_noMK.requestFocus();
-        btn_simpan.setEnabled(true);
-        btn_ubah.setEnabled(true);
-        btn_hapus.setEnabled(true);
-        btn_keluar.setEnabled(true);
+        btn_ubah.setEnabled(false);
+        btn_hapus.setEnabled(false);
+        
         aktif_teks();
     }//GEN-LAST:event_btn_tambahActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
         // TODO add your handling code here:
-        try
-        {
+        int jawab = JOptionPane.showOptionDialog(this, 
+                    "Apakah Anda Yakin Untuk Menghapus Data Mata Kuliah Ini?", 
+                    "Konfirmasi", 
+                    JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+        if (jawab == JOptionPane.YES_OPTION) {
+        
+        try {
             Class.forName(driver);
-            Connection kon = DriverManager.getConnection(database,user,pass);
-            Statement  stt = kon.createStatement();
-            String     SQL = "Delete From t_mata_kuliah "
-                                + "where "
-                              + "kd_mk='"+tableModel.getValueAt(row, 0).toString()+"'";
+            Connection kon = DriverManager.getConnection(database, user, pass);
+            Statement stt = kon.createStatement();
+            String SQL = "DELETE from t_mata_kuliah "
+                         + "where "
+                         + "kd_mk='"+tableModel.getValueAt(row, 0).toString()+"'";
+            
             stt.executeUpdate(SQL);
             tableModel.removeRow(row);
             stt.close();
             kon.close();
             membersihkan_teks();
         }
-        catch (Exception ex)
-        {
-            System.err.println(ex.getMessage());
+        catch(Exception e) {
+            System.err.println(e.getMessage());
         }
+      }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
         // TODO add your handling code here:
-        String data[]=new String[2];
+        String data[] = new String[2];
         
         if ((txt_noMK.getText().isEmpty()) || (txt_namaMK.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "Data tidak boleh kosong, silahkan dilengkapi");
-            
+            JOptionPane.showMessageDialog(null, "Data mata kuliah tidak boleh kosong, Ulangi!");
             txt_noMK.requestFocus();
         }
-        else 
-        {
-            try 
-            {
+        else {
+            try {
                 Class.forName(driver);
                 Connection kon = DriverManager.getConnection(database, user, pass);
-                Statement  stt = kon.createStatement();
-                String     SQL = "INSERT INTO t_mata_kuliah(kd_mk," + "nama_mk,"
-                                                                + "VALUES"
-                                                        + "('" +txt_noMK.getText()+"',"
-                                                        + "'" +txt_namaMK.getText()+"')";
+                Statement stt = kon.createStatement();
+                String SQL = "INSERT INTO t_mata_kuliah (kd_mk,"
+                        + "nama_mk) "
+                        + "VALUES"
+                        + "('"+txt_noMK.getText()+"',"
+                        + "'"+txt_namaMK.getText()+"')";
+                
                 stt.executeUpdate(SQL);
                 data[0] = txt_noMK.getText();
                 data[1] = txt_namaMK.getText();
                 tableModel.insertRow(0, data);
                 stt.close();
                 kon.close();
+                btn_ubah.setEnabled(true);
+                btn_hapus.setEnabled(true);
                 membersihkan_teks();
-                btn_simpan.setEnabled(false);
-                nonaktif_teks();
+                
+                JOptionPane.showMessageDialog(null, "Data mata kuliah berhasil disimpan");
+                
+                
             }
-            catch (Exception ex){
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error",
-                        JOptionPane.INFORMATION_MESSAGE);
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }//GEN-LAST:event_btn_simpanActionPerformed
 
     private void btn_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batalActionPerformed
         // TODO add your handling code here:
+        btn_ubah.setEnabled(true);
+        btn_hapus.setEnabled(true);
     }//GEN-LAST:event_btn_batalActionPerformed
 
     private void btn_keluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_keluarActionPerformed
         // TODO add your handling code here:
+        int jawab = JOptionPane.showOptionDialog(this, 
+                    "Apakah User Yakin Ingin Keluar?", 
+                    "Konfirmasi", 
+                    JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.QUESTION_MESSAGE, null, null, null);
+        if (jawab == JOptionPane.YES_OPTION) {
+        frm_utama utm = new frm_utama();
+        utm.setVisible(true);
+        
+        this.setVisible(false);
+        }
     }//GEN-LAST:event_btn_keluarActionPerformed
 
-    private void btn_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariActionPerformed
+    private void tbl_mataKuliahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_mataKuliahMouseClicked
         // TODO add your handling code here:
+        if (evt.getClickCount()== 1) {
+            tampil_field();
+        }
+    }//GEN-LAST:event_tbl_mataKuliahMouseClicked
+
+    private void txt_dataKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dataKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            tableModel.setRowCount(0);
         
-        tableModel.setRowCount(0);
+        String input = txt_data.getText();
         //gunakan query untuk mencari
-        try
-        {
+        try {
             Class.forName(driver);
-            Connection kon = DriverManager.getConnection(
-                database,
-                    user,
-                    pass);
-            Statement stt=kon.createStatement();
-            String SQL = "select * from t_mata_kuliah where kd_mk like'%"+
-                        txt_data.getText()+"%";
+            Connection kon = DriverManager.getConnection(database, user, pass);
+            Statement stt = kon.createStatement();
+            String SQL = "Select * from t_mata_kuliah where nama_mk LIKE '%" + input + "%'";
             ResultSet res = stt.executeQuery(SQL);
-            while(res.next())
-            {
+            while (res.next()) {
                 data[0] = res.getString(1);
                 data[1] = res.getString(2);
                 tableModel.addRow(data);
             }
             res.close();
-            stt.close();
             kon.close();
+            stt.close();
         }
-        catch(Exception ex)
-        {
-            System.err.println(ex.getMessage());
-            JOptionPane.showMessageDialog(null,
-                    ex.getMessage(), "Error",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
+            }
         }
-    }//GEN-LAST:event_btn_cariActionPerformed
-
-    private void btn_tampilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tampilActionPerformed
-        // TODO add your handling code here:
-        tableModel.setRowCount(0);
-        settableload();
-    }//GEN-LAST:event_btn_tampilActionPerformed
+    }//GEN-LAST:event_txt_dataKeyPressed
 
     /**
      * @param args the command line arguments
@@ -631,12 +633,10 @@ public class frm_matakuliah extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_batal;
-    private javax.swing.JButton btn_cari;
     private javax.swing.JButton btn_hapus;
     private javax.swing.JButton btn_keluar;
     private javax.swing.JButton btn_simpan;
     private javax.swing.JButton btn_tambah;
-    private javax.swing.JButton btn_tampil;
     private javax.swing.JButton btn_ubah;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -14,17 +14,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 /**
- *
- * @author Acer
+ *IF2  RAHMAYUDHI PRAKOSO - 10119051
+ *IF2  HANDRIAN RIVALDI - 10119074
+ * 
  */
 public class frm_matakuliah extends javax.swing.JFrame {
         koneksi dbsetting;
         String driver,database,user,pass;
         Object tabel;
-    /**
-     * Creates new form frm_matakuliah
-     */
-    public frm_matakuliah() {
+    
+    public frm_matakuliah() 
+    
+    {
         initComponents();
        
         
@@ -81,7 +82,7 @@ public class frm_matakuliah extends javax.swing.JFrame {
                                 user,
                                 pass);
             Statement stt=kon.createStatement();
-            String SQL = "select * from t_mata_kuliah";
+            String SQL = "SELECT * FROM t_mata_kuliah";
             ResultSet res = stt.executeQuery(SQL);
             while(res.next())
             {
@@ -106,7 +107,8 @@ public class frm_matakuliah extends javax.swing.JFrame {
     }
     
     
-    public void membersihkan_teks(){
+    public void membersihkan_teks()
+    {
         txt_noMK.setText("");
         txt_namaMK.setText("");
     }
@@ -124,7 +126,8 @@ public class frm_matakuliah extends javax.swing.JFrame {
     }
 
     int row = 0;
-    public void tampil_field(){
+    public void tampil_field()
+    {
         row = tbl_mataKuliah.getSelectedRow();
         txt_noMK.setText(tableModel.getValueAt(row, 0).toString());
         txt_namaMK.setText(tableModel.getValueAt(row, 1).toString());
@@ -133,9 +136,7 @@ public class frm_matakuliah extends javax.swing.JFrame {
         btn_hapus.setEnabled(true);
         btn_batal.setEnabled(false);
         aktif_teks();
-        
-    
-        
+  
     }
 
     /**
@@ -289,6 +290,7 @@ public class frm_matakuliah extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbl_mataKuliah);
 
+        btn_tambah.setBackground(new java.awt.Color(255, 153, 0));
         btn_tambah.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_tambah.setText("TAMBAH");
         btn_tambah.addActionListener(new java.awt.event.ActionListener() {
@@ -297,6 +299,7 @@ public class frm_matakuliah extends javax.swing.JFrame {
             }
         });
 
+        btn_ubah.setBackground(new java.awt.Color(51, 255, 0));
         btn_ubah.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_ubah.setText("UBAH");
         btn_ubah.addActionListener(new java.awt.event.ActionListener() {
@@ -305,6 +308,7 @@ public class frm_matakuliah extends javax.swing.JFrame {
             }
         });
 
+        btn_hapus.setBackground(new java.awt.Color(255, 0, 0));
         btn_hapus.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_hapus.setText("HAPUS");
         btn_hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -313,6 +317,7 @@ public class frm_matakuliah extends javax.swing.JFrame {
             }
         });
 
+        btn_simpan.setBackground(new java.awt.Color(51, 255, 0));
         btn_simpan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_simpan.setText("SIMPAN");
         btn_simpan.addActionListener(new java.awt.event.ActionListener() {
@@ -426,12 +431,15 @@ public class frm_matakuliah extends javax.swing.JFrame {
         String nama_mk = txt_namaMK.getText();
         
         
-        if ((no_mk.isEmpty()) || (nama_mk.isEmpty())) {
+        if ((no_mk.isEmpty()) || (nama_mk.isEmpty())) 
+        {
             JOptionPane.showMessageDialog(null, "Data tidak boleh kosong, Harap isi !");
             txt_noMK.requestFocus();
         }
-        else {
-            try {
+        else 
+        {
+            try 
+            {
                 Class.forName(driver);
                 Connection kon = DriverManager.getConnection(database, user, pass);
                 Statement stt = kon.createStatement();
@@ -454,7 +462,8 @@ public class frm_matakuliah extends javax.swing.JFrame {
                 
                 JOptionPane.showMessageDialog(null, "Data mata kuliah berhasil diubah");
             }
-            catch (Exception e) {
+            catch (Exception e) 
+            {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
             }
         }
@@ -477,14 +486,15 @@ public class frm_matakuliah extends javax.swing.JFrame {
                     JOptionPane.YES_NO_OPTION, 
                     JOptionPane.QUESTION_MESSAGE, null, null, null);
         
-        if (jawab == JOptionPane.YES_OPTION) {
+        if (jawab == JOptionPane.YES_OPTION) 
+        {
         
         try {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database, user, pass);
             Statement stt = kon.createStatement();
-            String SQL = "DELETE from t_mata_kuliah "
-                         + "where "
+            String SQL = "DELETE FROM t_mata_kuliah "
+                         + "WHERE "
                          + "kd_mk='"+tableModel.getValueAt(row, 0).toString()+"'";
             
             stt.executeUpdate(SQL);
@@ -493,7 +503,8 @@ public class frm_matakuliah extends javax.swing.JFrame {
             kon.close();
             membersihkan_teks();
         }
-        catch(Exception e) {
+        catch(Exception e) 
+        {
             System.err.println(e.getMessage());
         }
       }
@@ -503,12 +514,15 @@ public class frm_matakuliah extends javax.swing.JFrame {
         // TODO add your handling code here:
         String data[] = new String[2];
         
-        if ((txt_noMK.getText().isEmpty()) || (txt_namaMK.getText().isEmpty())) {
+        if ((txt_noMK.getText().isEmpty()) || (txt_namaMK.getText().isEmpty())) 
+        {
             JOptionPane.showMessageDialog(null, "Data mata kuliah tidak boleh kosong, Ulangi!");
             txt_noMK.requestFocus();
         }
-        else {
-            try {
+        else 
+        {
+            try 
+            {
                 Class.forName(driver);
                 Connection kon = DriverManager.getConnection(database, user, pass);
                 Statement stt = kon.createStatement();
@@ -532,7 +546,8 @@ public class frm_matakuliah extends javax.swing.JFrame {
                 
                 
             }
-            catch (Exception e) {
+            catch (Exception e) 
+            {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
             }
         }
@@ -551,7 +566,8 @@ public class frm_matakuliah extends javax.swing.JFrame {
                     "Konfirmasi", 
                     JOptionPane.YES_NO_OPTION, 
                     JOptionPane.QUESTION_MESSAGE, null, null, null);
-        if (jawab == JOptionPane.YES_OPTION) {
+        if (jawab == JOptionPane.YES_OPTION) 
+        {
         frm_utama utm = new frm_utama();
         utm.setVisible(true);
         
@@ -561,25 +577,28 @@ public class frm_matakuliah extends javax.swing.JFrame {
 
     private void tbl_mataKuliahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_mataKuliahMouseClicked
         // TODO add your handling code here:
-        if (evt.getClickCount()== 1) {
+        if (evt.getClickCount()== 1) 
+        {
             tampil_field();
         }
     }//GEN-LAST:event_tbl_mataKuliahMouseClicked
 
     private void txt_dataKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dataKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) 
+        {
             tableModel.setRowCount(0);
         
         String input = txt_data.getText();
-        //gunakan query untuk mencari
+        
         try {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database, user, pass);
             Statement stt = kon.createStatement();
-            String SQL = "Select * from t_mata_kuliah where nama_mk LIKE '%" + input + "%'";
+            String SQL = "SELECT * FROM t_mata_kuliah WHERE nama_mk LIKE '%" + input + "%'";
             ResultSet res = stt.executeQuery(SQL);
-            while (res.next()) {
+            while (res.next()) 
+            {
                 data[0] = res.getString(1);
                 data[1] = res.getString(2);
                 tableModel.addRow(data);
@@ -588,7 +607,8 @@ public class frm_matakuliah extends javax.swing.JFrame {
             kon.close();
             stt.close();
         }
-        catch (Exception e) {
+        catch (Exception e) 
+        {
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);

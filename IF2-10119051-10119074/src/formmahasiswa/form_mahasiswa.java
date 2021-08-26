@@ -6,8 +6,11 @@
 package formmahasiswa;
 
 /**
- *
- * @author LENOVO
+ * IF2  RAHMAYUDHI PRAKOSO - 10119051
+ * IF2  HANDRIAN RIVALDI - 10119074
+ * 
+ * 
+ * 
  */
 public class form_mahasiswa {
 

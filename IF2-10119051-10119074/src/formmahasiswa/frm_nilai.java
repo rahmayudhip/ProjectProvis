@@ -14,18 +14,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 /**
- *
- * @author Acer
+ *IF2  RAHMAYUDHI PRAKOSO - 10119051
+ *IF2  HANDRIAN RIVALDI - 10119074
+ * 
  */
 
 public class frm_nilai extends javax.swing.JFrame {
-//Deklarasi variable
+
     koneksi dbsetting;
     String driver,database,user,pass;
     Object tabel;
-    /**
-     * 
-     */
+    
+    
     public frm_nilai()
     {
         initComponents();
@@ -80,46 +80,54 @@ public class frm_nilai extends javax.swing.JFrame {
        };
     }
     int row = 0;
-    public void getDataComboBox() {
+    public void getDataComboBox() 
+    {
         row = tabel_nilai.getSelectedRow();
-        try {
+        try 
+        {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database, user, pass);
             Statement stt = kon.createStatement();
-            String SQL = "Select nama FROM t_mahasiswa";
+            String SQL = "SELECT nama FROM t_mahasiswa";
             ResultSet res = stt.executeQuery(SQL);
-            while (res.next()) {
+            while (res.next())
+            {
                 String nama = res.getString(1);
                 cmb_nama.addItem(nama);
             }
             
-            String sql = "Select nama_mk FROM t_mata_kuliah";
+            String sql = "SELECT nama_mk FROM t_mata_kuliah";
             ResultSet rs = stt.executeQuery(sql);
-            while (rs.next()) {
+            while (rs.next()) 
+            {
                 String nama_mk = rs.getString(1);
                 cmb_matkul.addItem(nama_mk);
             }
             res.close();
             stt.close();
             kon.close();
-          } catch (Exception ex) {
+        } 
+        catch (Exception ex) 
+        {
               JOptionPane.showMessageDialog(null,
                         ex.getMessage(), "Error",
                         JOptionPane.INFORMATION_MESSAGE
-                );
-          }
+            );
+        }
     }
     
     
     String data[] = new String [15];
-    private void settableload(){
+    private void settableload()
+    {
         String stat = "";
         
-        try {
+        try 
+        {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database, user, pass);
             Statement stt = kon.createStatement();
-            String SQL = "Select nama, nama_mk, absensi, tugas_1, tugas_2, tugas_3, uts, uas, nilai_absensi, nilai_tugas, nilai_uts, nilai_uas, nilai_akhir, indeks, keterangan From t_nilai";
+            String SQL = "SELECT nama, nama_mk, absensi, tugas_1, tugas_2, tugas_3, uts, uas, nilai_absensi, nilai_tugas, nilai_uts, nilai_uas, nilai_akhir, indeks, keterangan FROM t_nilai";
             ResultSet res = stt.executeQuery(SQL);
             while (res.next()) {
                 
@@ -350,6 +358,7 @@ public class frm_nilai extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabel_nilai);
 
+        btn_tambah.setBackground(new java.awt.Color(51, 255, 0));
         btn_tambah.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_tambah.setText("TAMBAH");
         btn_tambah.addActionListener(new java.awt.event.ActionListener() {
@@ -358,6 +367,7 @@ public class frm_nilai extends javax.swing.JFrame {
             }
         });
 
+        btn_ubah.setBackground(new java.awt.Color(255, 204, 0));
         btn_ubah.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_ubah.setText("UBAH");
         btn_ubah.addActionListener(new java.awt.event.ActionListener() {
@@ -366,6 +376,7 @@ public class frm_nilai extends javax.swing.JFrame {
             }
         });
 
+        btn_hapus.setBackground(new java.awt.Color(255, 0, 0));
         btn_hapus.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_hapus.setText("HAPUS");
         btn_hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -374,6 +385,7 @@ public class frm_nilai extends javax.swing.JFrame {
             }
         });
 
+        btn_simpan.setBackground(new java.awt.Color(51, 255, 0));
         btn_simpan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_simpan.setText("SIMPAN");
         btn_simpan.addActionListener(new java.awt.event.ActionListener() {
@@ -469,7 +481,7 @@ public class frm_nilai extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Angkatan");
 
-        cmb_nama.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmb_nama.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PILIH NAMA", " " }));
         cmb_nama.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cmb_nama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -477,7 +489,7 @@ public class frm_nilai extends javax.swing.JFrame {
             }
         });
 
-        cmb_matkul.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmb_matkul.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PILIH MATKU", " " }));
         cmb_matkul.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmb_matkulActionPerformed(evt);
@@ -499,7 +511,7 @@ public class frm_nilai extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btn_ubah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_ubah, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -552,7 +564,7 @@ public class frm_nilai extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(49, 49, 49)
                                 .addComponent(jLabel8)))
-                        .addGap(0, 109, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -629,13 +641,14 @@ public class frm_nilai extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_keluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_keluarActionPerformed
-        //validasi untuk keluar
+        //VALIDASI KELUAR
         int validasi = JOptionPane.showOptionDialog(this, 
                     "Yakin Ingin Keluar?", 
                     "Konfirmasi", 
                     JOptionPane.YES_NO_OPTION, 
                     JOptionPane.QUESTION_MESSAGE, null, null, null);
-        if (validasi == JOptionPane.YES_OPTION) {
+        if (validasi == JOptionPane.YES_OPTION) 
+        {
         frm_utama utm = new frm_utama();
         utm.setVisible(true);
         
@@ -662,9 +675,11 @@ public class frm_nilai extends javax.swing.JFrame {
             cmb_nama.requestFocus();
             
         }
-        else {
-            try {
-                //menghitung nilai absen
+        else 
+        {
+            try 
+            {
+                
                 int absen = Integer.parseInt(txt_kehadiran.getText());
                 
                 if (absen > 14) {
@@ -674,25 +689,25 @@ public class frm_nilai extends javax.swing.JFrame {
                 
                 int nilai_absen = ((absen/14)*100*5)/100;
                 
-                //menghitung nilai tugas
+                //hitung nilai tugas
                 Double tugas_1 = Double.valueOf(txt_tugas1.getText());
                 Double tugas_2 = Double.valueOf(txt_tugas2.getText());
                 Double tugas_3 = Double.valueOf(txt_tugas3.getText());
                 Double nilai_tugas = (((tugas_1+tugas_2+tugas_3)/3)*(0.25));
                 
-                    //menghitung nilai uts
+                    //hitung nilai uts
                     Double uts = Double.valueOf(txt_UTS.getText());
                     Double nilai_uts = (uts*0.3);
                 
-                        //menghitung nilai uas
+                        //hitung nilai uas
                         Double uas = Double.valueOf(txt_UAS.getText());
                         Double nilai_uas = (uas*0.4);
                 
-                            //menghitung nilai akhir dan menentukan index
+                            //hitung nilai akhir 
                             Double nilai_akhir = nilai_absen + nilai_tugas + nilai_uts + nilai_uas;
                             char indeks;
                             String keterangan;
-                
+                //INDEKS
                 if (nilai_akhir >= 80 && nilai_akhir <=100) {
                     indeks = 'A';
                     keterangan = "Lulus";
@@ -785,24 +800,22 @@ public class frm_nilai extends javax.swing.JFrame {
             catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
             }
-        }
-        
-        
+        }   
     }//GEN-LAST:event_btn_simpanActionPerformed
 
     private void cmb_namaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_namaActionPerformed
         // TODO add your handling code here:
         String nama = cmb_nama.getSelectedItem().toString();
         
-        if (nama == "Pilih Nama") {
+        if (nama == "===Pilih Nama===") {
             JOptionPane.showMessageDialog(null, "Silahkan pilih nama terlebih dahulu");
         } else {
             try {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database, user, pass);
             Statement stt = kon.createStatement();
-            String SQL = "select nim from t_mahasiswa "
-                        + "where nama= '"+nama+"' ";
+            String SQL = "SELECT nim FROM t_mahasiswa "
+                        + "WHERE nama= '"+nama+"' ";
             ResultSet res = stt.executeQuery(SQL);
             while (res.next()) {
                 txt_nim.setText(res.getString(1));  
@@ -824,24 +837,30 @@ public class frm_nilai extends javax.swing.JFrame {
         // TODO add your handling code here:
         String nama_mk = cmb_matkul.getSelectedItem().toString();
         
-        if (nama_mk == "Pilih Mata Kuliah") {
-            JOptionPane.showMessageDialog(null, "Silahkan pilih nama terlebih dahulu");
-        } else {
-            try {
+        if (nama_mk == "===Pilih Mata Kuliah===") {
+            JOptionPane.showMessageDialog(null, "Silahkan pilih Nama Mata Kuliah terlebih dahulu");
+        } 
+        else
+        {
+            try
+            {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database, user, pass);
             Statement stt = kon.createStatement();
-            String SQL = "select kd_mk from t_mata_kuliah "
-                        + "where nama_mk= '"+nama_mk+"' ";
+            String SQL = "SELECT kd_mk FROM t_mata_kuliah "
+                        + "WHERE nama_mk= '"+nama_mk+"' ";
             ResultSet res = stt.executeQuery(SQL);
-            while (res.next()) {
+            while (res.next()) 
+            {
                 txt_kodeMK.setText(res.getString(1));  
             }
             
             res.close();
             stt.close();
             kon.close();
-          } catch (Exception ex) {
+            }
+            catch (Exception ex) 
+            {
               JOptionPane.showMessageDialog(null,
                         ex.getMessage(), "Error",
                         JOptionPane.INFORMATION_MESSAGE
@@ -892,21 +911,20 @@ public class frm_nilai extends javax.swing.JFrame {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database, user, pass);
             Statement stt = kon.createStatement();
-            String SQL = "DELETE from t_nilai "
-                         + "where "
+            String SQL = "DELETE FROM t_nilai "
+                         + "WHERE "
                          + "nama='"+tableModel.getValueAt(row, 0).toString()+"'";
             
             stt.executeUpdate(SQL);
             tableModel.removeRow(row);
-            
-            
-            
+       
             stt.close();
             kon.close();
             
             membersihkan_teks();
         }
-        catch(Exception e) {
+        catch(Exception e) 
+        {
             System.err.println(e.getMessage());
         }
        }
@@ -927,9 +945,10 @@ public class frm_nilai extends javax.swing.JFrame {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database, user, pass);
             Statement stt = kon.createStatement();
-            String SQL = "Select * from t_nilai where nama LIKE '%" + cari + "%'"; 
+            String SQL = "SELECT * FROM t_nilai WHERE nama LIKE '%" + cari + "%'"; 
             ResultSet res = stt.executeQuery(SQL);
-            while (res.next()) {
+            while (res.next()) 
+            {
                 
                 data[0] = res.getString(1);
                 data[1] = res.getString(2);

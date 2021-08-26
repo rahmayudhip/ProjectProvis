@@ -6,14 +6,12 @@
 package formmahasiswa;
 
 /**
- *
- * @author Acer
+ *IF2  RAHMAYUDHI PRAKOSO - 10119051
+ *IF2  HANDRIAN RIVALDI - 10119074
  */
 public class frm_tentangPembuat extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frm_tentangPembuat
-     */
+    
     public frm_tentangPembuat() {
         initComponents();
     }

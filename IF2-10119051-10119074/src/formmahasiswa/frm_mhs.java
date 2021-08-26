@@ -16,16 +16,18 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 /**
  *
- * @author LENOVO
+ * IF2  RAHMAYUDHI PRAKOSO - 10119051
+ * IF2  HANDRIAN RIVALDI - 10119074
  */
 public class frm_mhs extends javax.swing.JFrame {
 
-    //deklarasi 
+    
     koneksi dbsetting;
     String driver,database,user,pass;
     Object tabel;
     
-    public frm_mhs() {
+    public frm_mhs() 
+    {
         initComponents();
         
         dbsetting = new koneksi();
@@ -112,7 +114,8 @@ public class frm_mhs extends javax.swing.JFrame {
     }
     
     
-    public void membersihkan_teks(){
+    public void membersihkan_teks()
+    {
         txt_nim.setText("");
         txt_nama.setText("");
         txt_tempat_lahir.setText("");
@@ -139,12 +142,13 @@ public class frm_mhs extends javax.swing.JFrame {
     }
 
     int row = 0;
-    public void tampil_field() throws ParseException{
+    public void tampil_field() throws ParseException
+    {
         row = tabel_mahasiswa.getSelectedRow();
         txt_nim.setText(tableModel.getValueAt(row, 0).toString());
         txt_nama.setText(tableModel.getValueAt(row, 1).toString());
         txt_tempat_lahir.setText(tableModel.getValueAt(row, 2).toString());
-        //untuk tanggal 
+        //tanggal 
         String dd = tableModel.getValueAt(row, 3).toString();
         Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dd);
         txt_tanggal_lahir.setDate(date);
@@ -236,6 +240,9 @@ public class frm_mhs extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setText("Masukan NIM");
 
+        btn_cari.setBackground(new java.awt.Color(0, 0, 204));
+        btn_cari.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_cari.setForeground(new java.awt.Color(255, 255, 255));
         btn_cari.setText("Cari");
         btn_cari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,6 +250,7 @@ public class frm_mhs extends javax.swing.JFrame {
             }
         });
 
+        btn_tampil.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_tampil.setText("Tampilkan Keseluruhan Data");
         btn_tampil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,7 +270,7 @@ public class frm_mhs extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(btn_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(91, 91, 91)
-                .addComponent(btn_tampil, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addComponent(btn_tampil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -329,6 +337,7 @@ public class frm_mhs extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tabel_mahasiswa);
 
+        btn_keluar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_keluar.setText("Keluar");
         btn_keluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -336,6 +345,7 @@ public class frm_mhs extends javax.swing.JFrame {
             }
         });
 
+        btn_batal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_batal.setText("Batal");
         btn_batal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -343,6 +353,8 @@ public class frm_mhs extends javax.swing.JFrame {
             }
         });
 
+        btn_simpan.setBackground(new java.awt.Color(51, 255, 0));
+        btn_simpan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_simpan.setText("Simpan");
         btn_simpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -350,6 +362,8 @@ public class frm_mhs extends javax.swing.JFrame {
             }
         });
 
+        btn_hapus.setBackground(new java.awt.Color(255, 0, 0));
+        btn_hapus.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_hapus.setText("Hapus");
         btn_hapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -357,6 +371,8 @@ public class frm_mhs extends javax.swing.JFrame {
             }
         });
 
+        btn_ubah.setBackground(new java.awt.Color(255, 204, 0));
+        btn_ubah.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_ubah.setText("Ubah");
         btn_ubah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -364,6 +380,8 @@ public class frm_mhs extends javax.swing.JFrame {
             }
         });
 
+        btn_tambah.setBackground(new java.awt.Color(0, 255, 0));
+        btn_tambah.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_tambah.setText("Tambah");
         btn_tambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -504,14 +522,15 @@ public class frm_mhs extends javax.swing.JFrame {
             txt_nim.requestFocus();
         }
         else {
-            try {
+            try 
+            {
                 String tanggal = "yyyy-MM-dd";
                 SimpleDateFormat frmt = new SimpleDateFormat(tanggal);
                 String tanggal_lahir = String.valueOf(frmt.format(txt_tanggal_lahir.getDate()));
                 Class.forName(driver);
                 Connection kon = DriverManager.getConnection(database, user, pass);
                 Statement stt = kon.createStatement();
-                String SQL = "Insert Into t_mahasiswa(nim,"
+                String SQL = "INSERT INTO t_mahasiswa(nim,"
                         + "nama,"
                         + "ttl,"
                         + "tgl_lahir,"
@@ -545,7 +564,8 @@ public class frm_mhs extends javax.swing.JFrame {
                 kon.close();
                 
             }
-            catch (Exception e) {
+            catch (Exception e) 
+            {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
             }
         }
@@ -555,9 +575,12 @@ public class frm_mhs extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getClickCount()==1)
         {
-            try {
+            try 
+            {
                 tampil_field();
-            } catch (ParseException ex) {
+            } 
+            catch (ParseException ex) 
+            {
                 Logger.getLogger(frm_mhs.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -571,11 +594,15 @@ public class frm_mhs extends javax.swing.JFrame {
         String tgl_lahir = txt_tanggal_lahir.getDateFormatString();
         String alamat = txt_alamat.getText();
         
-        if ((nim.isEmpty()) || (alamat.isEmpty())) {
+        if ((nim.isEmpty()) || (alamat.isEmpty())) 
+        {
             JOptionPane.showMessageDialog(null, "Data tidak boleh kosong, Harap isi !");
             txt_nim.requestFocus();
-        } else {
-            try {
+        } 
+        else
+        {
+            try
+            {
                 String tanggal = "yyyy-MM-dd";
                 SimpleDateFormat frmt = new SimpleDateFormat(tanggal);
                 String tanggal_lahir = String.valueOf(frmt.format(txt_tanggal_lahir.getDate()));
@@ -609,11 +636,11 @@ public class frm_mhs extends javax.swing.JFrame {
                 
                 JOptionPane.showMessageDialog(null, "Data mahasiswa berhasil diubah");
             }
-            catch (Exception e) {
+            catch (Exception e) 
+            {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
             }
-        }
-        
+        }    
     }//GEN-LAST:event_btn_ubahActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
@@ -630,8 +657,8 @@ public class frm_mhs extends javax.swing.JFrame {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database, user, pass);
             Statement stt = kon.createStatement();
-            String SQL = "DELETE from t_mahasiswa "
-                         + "where "
+            String SQL = "DELETE FROM t_mahasiswa "
+                         + "WHERE "
                          + "nim='"+tableModel.getValueAt(row, 0).toString()+"'";
             
             stt.executeUpdate(SQL);
@@ -640,7 +667,8 @@ public class frm_mhs extends javax.swing.JFrame {
             kon.close();
             membersihkan_teks();
         }
-        catch(Exception ex) {
+        catch(Exception ex) 
+        {
             System.err.println(ex.getMessage());
         }
       }                                   
@@ -651,14 +679,16 @@ public class frm_mhs extends javax.swing.JFrame {
         
         tableModel.setRowCount(0);
         
-        //gunakan query untuk mencari
-        try {
+        
+        try 
+        {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database, user, pass);
             Statement stt = kon.createStatement();
-            String SQL = "Select * from t_mahasiswa where nim=" + txt_cari_nim.getText();
+            String SQL = "SELECT * FROM t_mahasiswa WHERE nim=" + txt_cari_nim.getText();
             ResultSet res = stt.executeQuery(SQL);
-            while (res.next()) {
+            while (res.next()) 
+            {
                 data[0] = res.getString(1);
                 data[1] = res.getString(2);
                 data[2] = res.getString(3);
@@ -670,12 +700,12 @@ public class frm_mhs extends javax.swing.JFrame {
             kon.close();
             stt.close();
         }
-        catch (Exception e) {
+        catch (Exception e) 
+        {
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
         }
-    
     }//GEN-LAST:event_btn_cariActionPerformed
 
     private void btn_tampilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tampilActionPerformed
@@ -688,7 +718,6 @@ public class frm_mhs extends javax.swing.JFrame {
         // TODO add your handling code here:
         frm_utama utama = new frm_utama();
         utama.setVisible(true);
-        
     }//GEN-LAST:event_formWindowClosed
 
     private void btn_keluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_keluarActionPerformed
@@ -699,7 +728,8 @@ public class frm_mhs extends javax.swing.JFrame {
                     JOptionPane.YES_NO_OPTION, 
                     JOptionPane.QUESTION_MESSAGE, null, null, null);
         
-        if (jawab == JOptionPane.YES_OPTION) {
+        if (jawab == JOptionPane.YES_OPTION) 
+        {
         frm_utama utama = new frm_utama();
         utama.setVisible(true);
         
@@ -708,8 +738,7 @@ public class frm_mhs extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_keluarActionPerformed
 
     private void txt_tanggal_lahirPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txt_tanggal_lahirPropertyChange
-        // TODO add your handling code here:
-       
+        // TODO add your handling code here: 
     }//GEN-LAST:event_txt_tanggal_lahirPropertyChange
 
     private void btn_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batalActionPerformed

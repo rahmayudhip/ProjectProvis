@@ -17,17 +17,17 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 
 /**
- *
- * @author Acer
+ *IF2  RAHMAYUDHI PRAKOSO - 10119051
+ *IF2  HANDRIAN RIVALDI - 10119074
  */
 public class frm_transaksi extends javax.swing.JFrame {
 
             koneksi dbsetting;
             String driver, database, user, pass;
             Object tabel;
-    /**
-     * 
-     */
+    
+            
+            
     public frm_transaksi() 
     
     {
@@ -41,7 +41,7 @@ public class frm_transaksi extends javax.swing.JFrame {
         
         tabel_transaksi.setModel(tableModel);
         
-        total_bayar();
+        
         random_number();
         getDataComboBox();
         settableload();
@@ -55,32 +55,6 @@ public class frm_transaksi extends javax.swing.JFrame {
         txt_nota.setText(format);
     }
     
-    public void total_bayar () 
-    {
-        try 
-        {
-            Class.forName(driver);
-            Connection kon = DriverManager.getConnection(database, user, pass);
-            Statement stt = kon.createStatement();
-            String SQL = "select SUM(jumlah) from t_transaksi";
-            ResultSet res = stt.executeQuery(SQL);
-            while (res.next()) 
-            {
-                String sum = res.getString(1);
-                txt_Jumlah.setText(sum);
-            }
-            res.close();
-            stt.close();
-            kon.close();
-            } 
-           catch (Exception ex) 
-            {            
-              JOptionPane.showMessageDialog(null,
-                        ex.getMessage(), "Error",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
-          }
-    }
     
     public void getDataComboBox() 
     {
@@ -194,6 +168,7 @@ public class frm_transaksi extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         txt_nota = new javax.swing.JTextField();
         cmb_barang = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
@@ -251,7 +226,12 @@ public class frm_transaksi extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 100)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("JM");
+        jLabel1.setText("M");
+
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 100)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel12.setText("J");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -259,6 +239,8 @@ public class frm_transaksi extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,7 +262,9 @@ public class frm_transaksi extends javax.swing.JFrame {
                         .addComponent(jLabel19))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -347,6 +331,8 @@ public class frm_transaksi extends javax.swing.JFrame {
         tgl_transaksi.setDateFormatString("dd MMMM yyyy");
 
         txt_Jumlah.setEditable(false);
+        txt_Jumlah.setBackground(new java.awt.Color(204, 204, 204));
+        txt_Jumlah.setForeground(new java.awt.Color(255, 0, 0));
         txt_Jumlah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_JumlahActionPerformed(evt);
@@ -571,7 +557,7 @@ public class frm_transaksi extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Data berhasil disimpan");
 
-                total_bayar();
+               
                 stt.close();
                 kon.close();
 
@@ -605,7 +591,6 @@ public class frm_transaksi extends javax.swing.JFrame {
                     tableModel.removeRow(i);
                 }
 
-                total_bayar();
                 stt.close();
                 kon.close();
 
@@ -633,8 +618,8 @@ public class frm_transaksi extends javax.swing.JFrame {
                     Class.forName(driver);
                     Connection kon = DriverManager.getConnection(database, user, pass);
                     Statement stt = kon.createStatement();
-                    String SQL = "select harga_barang, id_barang from t_barang "
-                    + "where nama_barang= '"+nama_barang+"' ";
+                    String SQL = "SELECT harga_barang, id_barang FROM t_barang "
+                    + "WHERE nama_barang= '"+nama_barang+"' ";
                     ResultSet res = stt.executeQuery(SQL);
                     while (res.next()) {
                         txt_harga.setText(res.getString("harga_barang"));
@@ -754,6 +739,7 @@ public class frm_transaksi extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;

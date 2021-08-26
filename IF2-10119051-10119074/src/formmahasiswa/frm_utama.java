@@ -6,8 +6,8 @@
 package formmahasiswa;
 
 /**
- *
- * @author Acer
+ *IF2  RAHMAYUDHI PRAKOSO - 10119051
+ *IF2  HANDRIAN RIVALDI - 10119074
  */
 public class frm_utama extends javax.swing.JFrame {
 
@@ -126,6 +126,11 @@ public class frm_utama extends javax.swing.JFrame {
         jMenu1.setText("Aplikasi Kemahasiswaan");
 
         jMenuItem1.setText("Tentang Pembuat");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
@@ -212,6 +217,12 @@ public class frm_utama extends javax.swing.JFrame {
         this.setVisible(false);
         
     }//GEN-LAST:event_btn_simulasiKasusActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        frm_tentangPembuat ttn = new frm_tentangPembuat();
+        ttn.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments

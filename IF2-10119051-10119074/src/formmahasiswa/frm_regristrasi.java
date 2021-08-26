@@ -13,18 +13,20 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Reihan
+ *IF2  RAHMAYUDHI PRAKOSO - 10119051
+ *IF2  HANDRIAN RIVALDI - 10119074
+ * 
  */
 public class frm_regristrasi extends javax.swing.JFrame {
 
     koneksi dbsetting;
     String driver, database, user, pass;
     Object tabel;
-    /**
-     * Creates new form frm_daftar
-     */
-    public frm_regristrasi() {
+    
+    
+    
+    public frm_regristrasi() 
+    {
         initComponents();
         dbsetting = new koneksi();
         driver = dbsetting.SettingPanel("DBDriver");
@@ -78,16 +80,19 @@ public class frm_regristrasi extends javax.swing.JFrame {
         jLabel3.setText("Password :");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, -1, -1));
 
+        txt_user.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txt_user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_userActionPerformed(evt);
             }
         });
         getContentPane().add(txt_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 200, 30));
+
+        txt_pass.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         getContentPane().add(txt_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 200, 28));
 
+        txt_daftar.setBackground(new java.awt.Color(0, 255, 0));
         txt_daftar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        txt_daftar.setForeground(new java.awt.Color(0, 204, 0));
         txt_daftar.setText("Daftar");
         txt_daftar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +116,7 @@ public class frm_regristrasi extends javax.swing.JFrame {
         jLabel6.setText("Nama :");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, -1));
 
+        txt_nama.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txt_nama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_namaActionPerformed(evt);

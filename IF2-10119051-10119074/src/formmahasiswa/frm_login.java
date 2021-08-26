@@ -12,7 +12,8 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *IF2  RAHMAYUDHI PRAKOSO - 10119051
+ *IF2  HANDRIAN RIVALDI - 10119074
  * 
  */
 public class frm_login extends javax.swing.JFrame {
@@ -81,6 +82,7 @@ public class frm_login extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, -1, -1));
 
         txt_username.setBackground(new java.awt.Color(51, 255, 255));
+        txt_username.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txt_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_usernameActionPerformed(evt);
@@ -90,7 +92,7 @@ public class frm_login extends javax.swing.JFrame {
 
         btn_login.setBackground(new java.awt.Color(255, 255, 255));
         btn_login.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btn_login.setForeground(new java.awt.Color(0, 0, 153));
+        btn_login.setForeground(new java.awt.Color(0, 51, 255));
         btn_login.setText("Masuk");
         btn_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +102,7 @@ public class frm_login extends javax.swing.JFrame {
         getContentPane().add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 100, -1));
 
         txt_pass.setBackground(new java.awt.Color(51, 255, 255));
+        txt_pass.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txt_pass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_passActionPerformed(evt);
@@ -133,16 +136,21 @@ public class frm_login extends javax.swing.JFrame {
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         // TODO add your handling code here:
         
-        if (txt_username.getText().isEmpty() || (txt_pass.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "Data belum terisi, Isi Data Dengan Benar Dan Sesuai");
-        } else {
-            try {
+        if (txt_username.getText().isEmpty() || (txt_pass.getText().isEmpty())) 
+        {
+            JOptionPane.showMessageDialog(null, "Data Belum Terisi, Isi Data Dengan Benar Dan Sesuai");
+        }
+        else 
+        {
+            try 
+            {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database, user, pass);
             Statement stt = kon.createStatement();
             String sql = "SELECT username, password FROM t_pengguna WHERE username='"+txt_username.getText()+"' AND password='"+txt_pass.getText()+"' ";
             ResultSet res = stt.executeQuery(sql);
-            if (res.next()) {
+            if (res.next()) 
+            {
                 JOptionPane.showMessageDialog(null, "Berhasil Masuk");
                 frm_transaksi transaksi = new frm_transaksi();
                 transaksi.setVisible(true);
@@ -153,7 +161,9 @@ public class frm_login extends javax.swing.JFrame {
                     
                     txt_username.requestFocus(); 
                 }
-            } catch (Exception e){
+            } 
+            catch (Exception e)
+            {
                 JOptionPane.showMessageDialog(null,
                         e.getMessage(), "Error",
                         JOptionPane.INFORMATION_MESSAGE

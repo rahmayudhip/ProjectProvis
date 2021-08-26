@@ -14,15 +14,16 @@ import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 /**
  *
- * @author Acer
+ * IF2  RAHMAYUDHI PRAKOSO - 10119051
+ * IF2  HANDRIAN RIVALDI - 10119074
  */
 public class frm_nilaiAkhir extends javax.swing.JFrame {
     koneksi dbsetting;
     String driver, database, user, pass;
     Object tabel;
-    /**
-     * 
-     */
+    
+    
+    
     public frm_nilaiAkhir() 
     
     {
@@ -41,16 +42,19 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
     
     
     String data[] = new String [18];
-        private void settableload(){
+        private void settableload()
+        {
         String stat = "";
         
-        try {
+        try 
+        {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database, user, pass);
             Statement stt = kon.createStatement();
             String SQL = "Select * From t_nilaiAkhir";
             ResultSet res = stt.executeQuery(SQL);
-            while (res.next()) {
+            while (res.next()) 
+            {
                 
                 data[0] = res.getString(1);
                 data[1] = res.getString(2);
@@ -114,31 +118,38 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
                 )
                         
                 {
-                    boolean[] canEdit = new boolean[] {
+                    boolean[] canEdit = new boolean[] 
+                    {
                         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
                     };
                     
-                    public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    public boolean isCellEditable(int rowIndex, int columnIndex) 
+                    {
                         return canEdit[columnIndex];
                     }
                 };
-    }
-        public void getDataComboBox() {
-        try {
+            }
+        public void getDataComboBox() 
+        {
+        try 
+        {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database, user, pass);
             Statement stt = kon.createStatement();
             
             String sql = "Select nama_mk FROM t_mata_kuliah";
             ResultSet rs = stt.executeQuery(sql);
-            while (rs.next()) {
+            while (rs.next()) 
+            {
                 String nama_mk = rs.getString(1);
                 cmb_matkul.addItem(nama_mk);
             }
             rs.close();
             stt.close();
             kon.close();
-          } catch (Exception ex) {
+        }
+        catch (Exception ex) 
+        {
               JOptionPane.showMessageDialog(null,
                         ex.getMessage(), "Error",
                         JOptionPane.INFORMATION_MESSAGE
@@ -147,7 +158,8 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
         }
      
     int row=0;
-    public void tampil_field () {
+    public void tampil_field () 
+    {
         row = tabel_nilaiAkhir.getSelectedRow();
         
         aktif_teks();
@@ -165,7 +177,8 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
         txt_uas.setText(tableModel.getValueAt(row, 10).toString());
     }
     
-    public void nonaktif_teks() {
+    public void nonaktif_teks() 
+    {
         txt_kodeMK.setEnabled(false);
         txt_absen.setEnabled(false);
         txt_tugas.setEnabled(false);
@@ -179,7 +192,8 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
         txt_uas.setEnabled(false);
     }
     
-    public void aktif_teks () {
+    public void aktif_teks () 
+    {
         txt_kodeMK.setEnabled(true);
         txt_absen.setEnabled(true);
         txt_tugas.setEnabled(true);
@@ -193,7 +207,8 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
         txt_uas.setEnabled(true);
     }
     
-    public void membersihkan_teks() {
+    public void membersihkan_teks()
+    {
         txt_kodeMK.setText("");
         txt_absen.setText("");
         txt_tugas.setText("");
@@ -361,6 +376,7 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabel_nilaiAkhir);
 
+        btn_tambah.setBackground(new java.awt.Color(0, 255, 0));
         btn_tambah.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_tambah.setText("TAMBAH");
         btn_tambah.addActionListener(new java.awt.event.ActionListener() {
@@ -369,6 +385,7 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
             }
         });
 
+        btn_ubah.setBackground(new java.awt.Color(255, 204, 0));
         btn_ubah.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_ubah.setText("UBAH");
         btn_ubah.addActionListener(new java.awt.event.ActionListener() {
@@ -377,6 +394,7 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
             }
         });
 
+        btn_hapus.setBackground(new java.awt.Color(255, 0, 0));
         btn_hapus.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_hapus.setText("HAPUS");
         btn_hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -385,6 +403,7 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
             }
         });
 
+        btn_simpan.setBackground(new java.awt.Color(0, 255, 0));
         btn_simpan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_simpan.setText("SIMPAN");
         btn_simpan.addActionListener(new java.awt.event.ActionListener() {
@@ -424,7 +443,7 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel18.setText("%");
 
-        cmb_matkul.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmb_matkul.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PILIH NILAI AKHIR" }));
         cmb_matkul.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmb_matkulActionPerformed(evt);
@@ -768,7 +787,8 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
                     } //END IF
                 } //END IF VALIDASI
             }
-            catch (Exception e) {
+            catch (Exception e) 
+            {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
             }
         }
@@ -809,8 +829,8 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database, user, pass);
             Statement stt = kon.createStatement();
-            String SQL = "select kd_mk from t_mata_kuliah "
-                        + "where nama_mk= '"+mata_kuliah+"' ";
+            String SQL = "SELECT kd_mk FROM t_mata_kuliah "
+                        + "WHERE nama_mk= '"+mata_kuliah+"' ";
             ResultSet res = stt.executeQuery(SQL);
             while (res.next()) {
                 txt_kodeMK.setText(res.getString(1));  
@@ -859,7 +879,7 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
             
         } else {
             try {
-                 //menghitung nilai absen
+                 //hitung nilai absen
                 Double hadir = Double.valueOf(txt_kehadiran.getText());
                 
                 if (hadir > 14) {
@@ -870,19 +890,19 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
                 
                 Double nilai_absen = (((hadir/14)*100*absen)/100);
                 
-                //nilai_tugas
+                //hitung nilai_tugas
                 Double presentase_Tugas = Double.valueOf(txt_tugas.getText());
                 Double tugas1 = Double.valueOf(txt_tugas1.getText());
                 Double tugas2 = Double.valueOf(txt_tugas2.getText());
                 Double tugas3 = Double.valueOf(txt_tugas3.getText());
                 Double nilai_tugas = (((tugas1+tugas2+tugas3)/3)*(presentase_Tugas/100));
                 
-                        //nilai_uts
+                        //hitung nilai_uts
                         Double presentase_UTS = Double.valueOf(txt_presentaseuts.getText());
                         Double UTS = Double.valueOf(txt_uts.getText());
                         Double nilai_uts = UTS * (presentase_UTS/100);
                 
-                                //nilai_uas
+                                //hitung nilai_uas
                                 Double presentase_UAS = Double.valueOf(txt_presentaseuas.getText());
                                 Double UAS = Double.valueOf(txt_uas.getText());
                                 Double nilai_uas = UAS * (presentase_UAS/100);
@@ -973,7 +993,7 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
                 kon.close();
                 
                 membersihkan_teks();
-                    } //end if validasi max nilai input 100
+                    } //end if validasi max nilai input adalah 100
                 } //endif
             }
             catch (Exception e) {
@@ -996,8 +1016,8 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database, user, pass);
             Statement stt = kon.createStatement();
-            String SQL = "DELETE from t_nilaiAkhir "
-                         + "where "
+            String SQL = "DELETE FROM t_nilaiAkhir "
+                         + "WHERE "
                          + "nama_mk='"+tableModel.getValueAt(row, 0).toString()+"'";
             
             stt.executeUpdate(SQL);
@@ -1006,7 +1026,8 @@ public class frm_nilaiAkhir extends javax.swing.JFrame {
             kon.close();
             membersihkan_teks();
         }
-        catch(Exception e) {
+        catch(Exception e) 
+        {
             System.err.println(e.getMessage());
         }
       }
